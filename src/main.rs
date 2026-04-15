@@ -167,3 +167,96 @@ fn data_cloning() {
     let s2 = s1.clone(); // s1 is cloned to s2, both s1 and s2 can be used independently
     println!("s1: {}, s2: {}", s1, s2);
 }
+
+//loop label
+#[test]
+fn loop_label() {
+    'outer: for i in 1..=3 {
+        for j in 1..=3 {
+            if i == 2 && j == 2 {
+                break 'outer; // Breaks out of the outer loop
+            }
+            println!("i: {}, j: {}", i, j); 
+        }
+    }
+}   
+
+#[test]
+fn while_loop() {
+    let mut count = 0;
+    while count < 5 {
+        println!("Count: {}", count);
+        count += 1;
+    }
+}
+
+// method 
+
+struct Person {
+    name: String,
+    age: u32,
+}
+
+impl Person {
+    fn say_hello(&self) {
+        println!("Hello, my name is {} and I am {} years old.", self.name, self.age);
+    }
+}
+
+#[test]
+fn test_person() {
+    let person = Person {
+        name: String::from("Alice"),
+        age: 30,
+    };
+    person.say_hello();
+}   
+
+
+// enum 
+
+enum  Level {
+    Low,
+    Medium,
+    High,
+}
+
+#[test]
+fn test_level() {
+    let _level : Level = Level::Medium;
+    match _level {
+        Level::Low => println!("Level is Low"),
+        Level::Medium => println!("Level is Medium"),
+        Level::High => println!("Level is High"),
+        
+    }
+}
+
+//enum tuple
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+#[test]
+fn test_message() {
+    let msg1 = Message::Quit;
+    let msg2 = Message::Move { x: 10, y: 20 };
+    let msg3 = Message::Write(String::from("Hello"));   
+    match msg1 {
+        Message::Quit => println!("Message: Quit"),
+        Message::Move { x, y } => println!("Message: Move to ({}, {})", x, y),
+        Message::Write(text) => println!("Message: Write '{}'", text),
+    }
+    match msg2 {
+        Message::Quit => println!("Message: Quit"),
+        Message::Move { x, y } => println!("Message: Move to ({}, {})", x, y),
+        Message::Write(text) => println!("Message: Write '{}'", text),
+    }
+    match msg3 {
+        Message::Quit => println!("Message: Quit"),
+        Message::Move { x, y } => println!("Message: Move to ({}, {})", x, y),
+        Message::Write(text) => println!("Message: Write '{}'", text),
+    }
+}
